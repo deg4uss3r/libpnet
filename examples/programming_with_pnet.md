@@ -16,24 +16,24 @@ The first thing to understand is the general layout of a `pnet`. The flow of cod
 
 This is actually a very simple process. Five steps total, one of which is optional (step 3, in case you were wondering). Let's take a look at each of the steps and how to implement them.
 
-# Anaomity of a Basic `pnet` program
+# Anatomy of a Basic `pnet` program
 
 ## Step 1: Getting/Setting the Device
 
 This is very simple, but nowadays there are many devices on machines, so we need to make sure we're selecting the correct device or else we might not see any packets (or that packets we are expecting). There are a couple ways to find out the network interface:
 
 - Linux
- - `/sbin/ip link show | grep 'state UP'`
-  - This is the most up-to-date application for the network interfaces and highly reccomended
-  - You can install this if you are missing it by `yum (or apt-get) install iproute`
+  - `/sbin/ip link show | grep 'state UP'`
+    - This is the most up-to-date application for the network interfaces and highly reccomended
+    - You can install this if you are missing it by `yum (or apt-get) install iproute`
 
 - MacOS
- - `networksetup -listallhardwareports` 
-    - This is the recommended way to get the network interfaces
+  - `networksetup -listallhardwareports`
+  - This is the recommended way to get the network interfaces
 
 - Using `pnet`
- - We can always use `pnet` to list out the interfaces (first example time!): 
- - first run `cargo new interfaces --bin` then make the adjustments in the files:
+  - We can always use `pnet` to list out the interfaces (first example time!): 
+  - first run `cargo new interfaces --bin` then make the adjustments in the files:
 
 Cargo.toml: 
 
@@ -83,7 +83,7 @@ This also gives us a great insite into the NetworkInterfaces data structure.
 
 From here we can pick an interface to sniff. Let's subscript to the interface `en0` because it has an active IPv4 address.
 
-## Opening The Device for Sniffing
+## Step 2: Opening The Device for Sniffing
 
 Using the base code above let's open the interface for printing out the raw bytes of the first ten packets:
 
